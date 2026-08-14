@@ -1,103 +1,368 @@
-# Voice-Controlled Agent System
+# 🎙️ VoiceForge AI
 
-A voice-enabled multi-agent system that allows users to interact with AI agents using speech-to-text and hear responses via text-to-speech.
+### Intelligent Voice-Controlled Multi-Agent System
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Ollama](https://img.shields.io/badge/LLM-Ollama-black)
+<p align="center">
+  <strong>Speak naturally. Delegate intelligently. Get your answers back through voice.</strong>
+</p>
 
----
+<p align="center">
+  A privacy-focused voice AI system combining speech recognition, local LLM reasoning, multi-agent orchestration, and text-to-speech interaction.
+</p>
 
-## Table of Contents
+<p align="center">
 
-- [Overview](#overview)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
-- [FFmpeg Installation](#ffmpeg-installation)
-- [Installation](#installation)
-- [Running the Application](#running-the-application)
-- [Usage](#usage)
-- [Voice Commands](#voice-commands)
-- [Sample Workflow](#sample-workflow)
-- [Project Structure](#project-structure)
-- [Voice Features Explained](#voice-features-explained)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
-- [Roadmap](#roadmap)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-- [Contact](#contact)
+![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
+![Whisper](https://img.shields.io/badge/Whisper-Speech--to--Text-412991?style=for-the-badge)
+![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-black?style=for-the-badge)
+![Streamlit](https://img.shields.io/badge/Streamlit-App%20UI-FF4B4B?style=for-the-badge\&logo=streamlit\&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+</p>
 
 ---
 
-## Overview
+## ✨ Overview
 
-This application extends the AthenaCore multi-agent system by adding voice capabilities. Users can speak their questions and hear agent responses aloud, making research more accessible and hands-free. It is designed for researchers, professionals, and anyone who prefers voice interaction.
+**VoiceForge AI** is a voice-first multi-agent AI system designed to make interaction with intelligent agents more natural, accessible, and hands-free.
 
-The application runs entirely locally, ensuring data privacy and eliminating API costs. It uses Ollama to host the LLaMA 2 model, Whisper for speech-to-text, pyttsx3 for text-to-speech, and Streamlit for the user interface.
+Instead of requiring users to type every request, VoiceForge AI creates a complete voice interaction loop:
+
+```text
+🎙️ User Speech
+      ↓
+🎧 Audio Capture
+      ↓
+📝 Speech-to-Text
+      ↓
+🧠 AI Agent Orchestration
+      ↓
+🤖 Specialized Agents
+      ↓
+💬 Generated Response
+      ↓
+🔊 Text-to-Speech
+      ↓
+👤 User Hears the Answer
+```
+
+The system combines **speech recognition**, **local large language models**, **multi-agent reasoning**, and **text-to-speech** into a single workflow.
+
+A major design goal is **local-first AI**: the application can run without relying on paid cloud inference APIs, helping keep voice interactions and generated content on the user's machine.
+
+---
+
+## 🚀 Why VoiceForge AI?
+
+Traditional AI assistants generally follow a simple:
+
+> User → LLM → Response
+
+architecture.
+
+VoiceForge AI expands that concept by introducing a **multi-agent orchestration layer**.
+
+Different agents can specialize in different reasoning tasks, allowing a single voice request to trigger a more structured AI workflow.
+
+For example:
+
+```text
+                    ┌─────────────────┐
+                    │   Voice Input   │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │     Whisper     │
+                    │ Speech-to-Text │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │   Orchestrator  │
+                    └────────┬────────┘
+                             ↓
+              ┌──────────────┼──────────────┐
+              ↓              ↓              ↓
+        ┌──────────┐   ┌───────────┐   ┌──────────┐
+        │ Research │   │ Summarize │   │  Insight │
+        │  Agent   │   │   Agent   │   │  Agent   │
+        └────┬─────┘   └─────┬─────┘   └────┬─────┘
+             └───────────────┼──────────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │   LLM Response  │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │    pyttsx3      │
+                    │ Text-to-Speech  │
+                    └────────┬────────┘
+                             ↓
+                         🔊 Voice
+```
 
 ---
 
-## Features
+## 🎯 Key Features
 
-- **Voice Input** — Speak your questions using your microphone
-- **Speech-to-Text** — Converts voice to text using Whisper
-- **Text-to-Speech** — Reads agent responses aloud using pyttsx3
-- **Multi-Agent Support** — Works with all AthenaCore agents
-- **Voice Commands** — Quick voice actions for common tasks
-- **Audio File Upload** — Upload pre-recorded audio files
-- **Privacy-Focused** — All processing happens locally, no data is sent to external servers
-- **No API Costs** — Free to use with no usage limits
+### 🎙️ Voice Interaction
+
+Interact with the AI using your microphone instead of relying entirely on keyboard input.
+
+### 📝 Speech-to-Text
+
+Voice input is transcribed using **OpenAI Whisper**, converting spoken language into text that can be processed by the agent system.
+
+### 🧠 Multi-Agent Architecture
+
+The system is designed around specialized AI agents rather than a single monolithic chatbot.
+
+Potential agent responsibilities include:
+
+* Research
+* Summarization
+* Insight generation
+* Devil's advocate / critical reasoning
+* Voice interaction
+
+### 🤖 Local LLM Inference
+
+The project integrates with **Ollama** to run large language models locally.
+
+This makes it possible to experiment with AI agents without requiring a paid hosted LLM API.
+
+### 🔊 Text-to-Speech
+
+AI responses can be converted back into spoken language using **pyttsx3**.
+
+### 🎧 Audio File Support
+
+The system can work with recorded audio in addition to direct microphone interaction.
+
+### 🖥️ Interactive Interface
+
+The application uses **Streamlit** to provide a simple browser-based interface for interacting with the agent system.
+
+### 🔐 Privacy-Oriented Architecture
+
+The project is designed around local processing, reducing the need to send voice data and prompts to external AI services.
+
+### 💰 API-Free AI Workflow
+
+By using local model inference through Ollama, the system can be used without per-request cloud inference costs.
 
 ---
 
-## Technology Stack
+## 🧩 Technology Stack
 
-| Technology | Purpose |
-|---|---|
-| **Whisper** | Speech-to-text transcription |
-| **pyttsx3** | Text-to-speech synthesis |
-| **sounddevice** | Audio recording from microphone |
-| **soundfile** | Audio file handling |
-| **pydub** | Audio processing and conversion |
-| **LLaMA 2** | Large Language Model for agent reasoning |
-| **Ollama** | Local LLM hosting and inference |
-| **TinyDB** | Lightweight JSON database for memory storage |
-| **Streamlit** | Frontend user interface |
+| Technology                        | Role                            |
+| --------------------------------- | ------------------------------- |
+| **Python**                        | Core application language       |
+| **Whisper**                       | Speech-to-text transcription    |
+| **Ollama**                        | Local LLM runtime               |
+| **LLaMA / compatible local LLMs** | AI reasoning                    |
+| **pyttsx3**                       | Text-to-speech                  |
+| **Streamlit**                     | Interactive web interface       |
+| **sounddevice**                   | Microphone/audio capture        |
+| **soundfile**                     | Audio file handling             |
+| **pydub**                         | Audio processing                |
+| **TinyDB**                        | Lightweight local data storage  |
+| **FFmpeg**                        | Audio conversion and processing |
 
 ---
+
+## 🏗️ Architecture
+
+VoiceForge AI separates the application into multiple responsibilities.
+
+### 1. Voice Layer
+
+Responsible for capturing and processing user audio.
+
+```text
+Microphone
+    ↓
+Audio Recording
+    ↓
+Whisper
+    ↓
+Transcribed Text
+```
+
+### 2. Agent Layer
+
+The transcribed request is passed into the agent system.
+
+```text
+User Request
+     ↓
+Agent Orchestrator
+     ↓
+Specialized Agent
+     ↓
+LLM Reasoning
+```
+
+### 3. Response Layer
+
+The generated response is returned to the user as both text and speech.
+
+```text
+AI Response
+     ↓
+pyttsx3
+     ↓
+Spoken Response
+```
+
+---
+
+## 🧠 Multi-Agent Workflow
+
+VoiceForge AI can expose specialized reasoning capabilities through voice commands.
+
+| Voice Command                   | Agent / Action       |
+| ------------------------------- | -------------------- |
+| **"Summarize our discussion"**  | Summarization        |
+| **"Challenge our assumptions"** | Devil's Advocate     |
+| **"Give me key insights"**      | Insight generation   |
+| **"Do a full analysis"**        | Multi-agent workflow |
+
+This architecture makes the system extensible: additional specialized agents can be introduced without redesigning the entire voice interface.
+
+---
+
+## 📂 Project Structure
+
+```text
+voiceforge-ai/
+│
+├── agents/
+│   ├── ...
+│   └── ...
+│
+├── static/
+│   └── ...
+│
+├── templates/
+│   └── ...
+│
+├── utils/
+│   └── ...
+│
+├── app.py
+├── frontend.py
+├── orchestrator.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
+### Core Components
+
+| Component          | Responsibility                     |
+| ------------------ | ---------------------------------- |
+| `agents/`          | Specialized AI-agent functionality |
+| `orchestrator.py`  | Coordinates agent execution        |
+| `frontend.py`      | User-facing application interface  |
+| `app.py`           | Application entry point            |
+| `utils/`           | Supporting utilities               |
+| `templates/`       | UI templates                       |
+| `static/`          | Static assets                      |
+| `requirements.txt` | Python dependencies                |
+
+---
+
+# ⚙️ Installation
 
 ## Prerequisites
 
-| Requirement | Details |
-|---|---|
-| **Python** | Version 3.8 or higher |
-| **Ollama** | Installed and running |
-| **LLaMA 2 Model** | Downloaded via Ollama |
-| **FFmpeg** | Installed and added to PATH (for audio processing) |
-| **Microphone** | Working microphone for voice input |
-| **RAM** | 8GB+ recommended |
-| **Storage** | 5GB+ free space for models |
+Before running VoiceForge AI, make sure you have:
+
+* Python **3.8 or newer**
+* Ollama
+* A compatible local LLM
+* FFmpeg
+* A working microphone
+* Approximately **8 GB+ RAM recommended**
+* Sufficient disk space for local AI models
 
 ---
 
-## FFmpeg Installation
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/Esha-Mirza/voice-controlled-agent-ai.git
+
+cd voice-controlled-agent-ai
+```
+
+---
+
+## 2. Create a Virtual Environment
 
 ### Windows
 
-1. Download FFmpeg from: [gyan.dev/ffmpeg/builds](https://www.gyan.dev/ffmpeg/builds/)
-2. Download the **"ffmpeg-release-full.7z"** file
-3. Extract it to `C:\ffmpeg`
-4. Add `C:\ffmpeg\bin` to your system PATH
+```bash
+python -m venv venv
 
-### Mac
+venv\Scripts\activate
+```
+
+### macOS / Linux
+
+```bash
+python3 -m venv venv
+
+source venv/bin/activate
+```
+
+---
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🦙 Configure Ollama
+
+Install Ollama and make sure the Ollama service is running.
+
+Then download a compatible model.
+
+For example:
+
+```bash
+ollama pull llama2
+```
+
+You can also use another compatible local model supported by your configuration.
+
+Start Ollama with:
+
+```bash
+ollama serve
+```
+
+---
+
+# 🎧 Configure FFmpeg
+
+FFmpeg is required for audio processing.
+
+### Windows
+
+Install FFmpeg and add its `bin` directory to your system `PATH`.
+
+### macOS
 
 ```bash
 brew install ffmpeg
 ```
 
-### Ubuntu
+### Ubuntu / Debian
 
 ```bash
 sudo apt install ffmpeg
@@ -105,193 +370,133 @@ sudo apt install ffmpeg
 
 ---
 
-## Installation
+# ▶️ Running the Application
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Esha-Mirza/School_Of_AI_Internship.git
-cd School_Of_AI_Internship/"Project-15 Voice-Controlled Agent System"
-```
-
-### 2. Create Virtual Environment
-
-```bash
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # Mac/Linux
-```
-
-### 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Pull LLaMA 2 Model via Ollama
-
-```bash
-ollama pull llama2
-```
-
-This downloads the LLaMA 2 model (~3.8 GB). Alternatively, you can use a smaller model:
-
-```bash
-ollama pull phi3        # 2.2 GB, faster inference
-ollama pull gemma:2b    # 1.4 GB, lightest option
-```
-
----
-
-## Running the Application
-
-**Terminal 1: Start Ollama Service**
-
-```bash
-ollama serve
-```
-
-**Terminal 2: Start Streamlit Frontend**
+Start the Streamlit interface:
 
 ```bash
 streamlit run frontend.py
 ```
 
-The frontend will open at: `http://localhost:8501`
-
----
-
-## Usage
-
-1. Open your browser and navigate to `http://localhost:8501`
-2. Create a new topic or select an existing one
-3. Choose a voice input method:
-   - **Start Recording** — Speak your question using your microphone
-   - **Upload Audio File** — Upload a pre-recorded audio file
-   - **Type Manually** — Type your question as an alternative
-
----
-
-## Voice Commands
-
-| Command | What It Does |
-|---|---|
-| "Summarize our discussion" | Runs the Summarizer Agent |
-| "Challenge our assumptions" | Runs the Devil's Advocate Agent |
-| "Give me key insights" | Runs the Insight Agent |
-| "Do a full analysis" | Runs all agents in sequence |
-
----
-
-## Sample Workflow
-
-**Voice Input:**
+Then open:
 
 ```text
-User (speaking): "What are the latest trends in AI?"
-```
-
-**Transcription:**
-
-```text
-Transcribed: "What are the latest trends in AI?"
-```
-
-**Agent Response:**
-
-```text
-Research Agent: The latest trends include generative AI, large language models, and multimodal systems...
-```
-
-**Voice Output:** The response is read aloud using text-to-speech.
-
----
-
-## Project Structure
-
-```
-Project-15 Voice-Controlled Agent System/
-├── agents/
-│   ├── __init__.py
-│   ├── base.py
-│   ├── voice_agent.py      # Voice functionality
-│   ├── research_agent.py
-│   ├── summarizer_agent.py
-│   ├── devil_agent.py
-│   └── insight_agent.py
-├── memory/
-│   ├── .gitkeep
-│   └── memory_store.json
-├── orchestrator.py
-├── frontend.py              # Updated with voice features
-├── requirements.txt
-└── README.md
+http://localhost:8501
 ```
 
 ---
 
-## Voice Features Explained
+# 🎤 Using VoiceForge AI
 
-### Speech-to-Text (Whisper)
+Once the application is running:
 
-```text
-Audio Input → Whisper Model → Text Output
-```
+### Step 1 — Start a conversation
 
-- Uses OpenAI's Whisper model for accurate transcription
-- Supports various audio formats and microphone input
-- First run downloads the Whisper model (~1 GB)
+Create a new topic or select an existing conversation.
 
-### Text-to-Speech (pyttsx3)
+### Step 2 — Provide input
 
-```text
-Text Output → pyttsx3 Engine → Audio Output
-```
+You can:
 
-- Reads agent responses aloud
-- Configurable voice speed and volume
-- Works offline with system voices
+* 🎙️ Record your voice
+* 📁 Upload an audio file
+* ⌨️ Enter text manually
 
-### Audio Recording (sounddevice)
+### Step 3 — Let the agents reason
 
-```text
-Microphone → sounddevice Recording → Audio Data
-```
+Your request is transcribed and passed into the AI orchestration layer.
 
-- Records audio from your microphone
-- Configurable recording duration (3-15 seconds)
-- Converts to format suitable for Whisper
+### Step 4 — Receive the result
+
+The generated response is displayed and can be spoken back through text-to-speech.
 
 ---
 
-## Configuration
+# 🔄 Example Interaction
 
-### Changing the Model
+### User
 
-To use a different LLM model, modify `agents/base.py`:
+> "What are the major trends in artificial intelligence?"
+
+### VoiceForge AI
+
+```text
+🎙️ Voice Input
+       ↓
+📝 Whisper Transcription
+       ↓
+🧠 Agent Orchestrator
+       ↓
+🤖 AI Reasoning
+       ↓
+💬 Generated Response
+       ↓
+🔊 Text-to-Speech
+```
+
+The user can then hear the generated response without needing to read the entire answer.
+
+---
+
+# 🔧 Configuration
+
+VoiceForge AI is designed to be configurable.
+
+## Change the LLM
+
+The local model can be changed through the agent configuration.
+
+For example:
 
 ```python
-MODEL = "phi3"        # Change from "llama2" to your preferred model
+MODEL = "llama2"
 ```
 
-### Changing Recording Duration
+Depending on your Ollama installation, this can be replaced with another compatible model.
 
-To adjust the default recording duration, modify the slider in the UI:
+---
+
+## Change Recording Duration
+
+The recording duration can be configured through the Streamlit interface.
+
+Example:
 
 ```python
-recording_duration = st.slider("Recording Duration (seconds)", 3, 15, 5)
+recording_duration = st.slider(
+    "Recording Duration (seconds)",
+    3,
+    15,
+    5
+)
 ```
 
-### Changing Voice Settings
+---
 
-To change TTS voice settings, modify `agents/voice_agent.py`:
+## Configure Text-to-Speech
+
+Voice properties such as speech rate and volume can be adjusted.
 
 ```python
-engine.setProperty('rate', 180)    # Speed of speech
-engine.setProperty('volume', 1.0)  # Volume (0.0 to 1.0)
+engine.setProperty("rate", 180)
+engine.setProperty("volume", 1.0)
 ```
 
-### Changing the Port
+---
+
+# 🛠️ Troubleshooting
+
+| Problem                   | Possible Solution                     |
+| ------------------------- | ------------------------------------- |
+| Model not found           | Pull the required model with Ollama   |
+| Ollama connection refused | Start `ollama serve`                  |
+| Microphone unavailable    | Check OS microphone permissions       |
+| FFmpeg not found          | Install FFmpeg and add it to `PATH`   |
+| TTS unavailable           | Verify `pyttsx3` and system voices    |
+| Python module missing     | Run `pip install -r requirements.txt` |
+| Port already in use       | Start Streamlit using another port    |
+
+Example:
 
 ```bash
 streamlit run frontend.py --server.port 8502
@@ -299,45 +504,115 @@ streamlit run frontend.py --server.port 8502
 
 ---
 
-## Troubleshooting
+# 🗺️ Roadmap
 
-| Issue | Solution |
-|---|---|
-| Model not found | Run `ollama pull llama2` to download the model |
-| Connection refused | Ensure Ollama is running (`ollama serve`) |
-| Microphone not found | Check your microphone settings in Control Panel |
-| FFmpeg not found | Install FFmpeg and add to PATH |
-| Whisper model error | First run downloads the model — be patient |
-| TTS not working | Ensure pyttsx3 is installed and system voices are available |
-| Port already in use | Use `--server.port` flag to specify a different port |
-| Module not found | Run `pip install -r requirements.txt` |
+The project can be extended with several advanced capabilities:
 
----
-
-## Roadmap
-
-- [ ] Add wake-word detection for hands-free activation (no button press needed)
-- [ ] Add selectable TTS voices/accents
-- [ ] Add live transcription streaming instead of record-then-transcribe
+* [ ] Wake-word detection
+* [ ] Real-time streaming transcription
+* [ ] Configurable TTS voices and accents
+* [ ] Improved conversational memory
+* [ ] More specialized AI agents
+* [ ] Tool/function calling
+* [ ] Agent performance monitoring
+* [ ] Long-term memory
+* [ ] Multi-language voice support
+* [ ] Voice activity detection
+* [ ] More advanced agent routing
 
 ---
 
-## License
+# 🔮 Future Vision
 
-This project is open source and available under the [MIT License](LICENSE).
+The long-term goal of VoiceForge AI is to evolve from a voice-controlled chatbot into a **general-purpose local AI agent platform**.
+
+The architecture can be extended toward:
+
+```text
+                 VoiceForge AI
+                      │
+          ┌───────────┼───────────┐
+          ↓           ↓           ↓
+       Voice       Agents       Tools
+          │           │           │
+          ↓           ↓           ↓
+       Whisper     Local LLM    APIs / OS
+          │           │           │
+          └───────────┼───────────┘
+                      ↓
+                Agent Memory
+                      ↓
+              Intelligent Action
+```
+
+This provides a foundation for building more capable, privacy-conscious AI assistants.
 
 ---
 
-## Acknowledgments
+# 🔐 Privacy
 
-- OpenAI Whisper - Speech recognition
-- pyttsx3 - Text-to-speech
-- [Ollama](https://ollama.com/) - Local LLM runtime
-- Streamlit - UI framework
+VoiceForge AI is designed with a local-first philosophy.
+
+When configured with local inference through Ollama, AI processing can remain on the user's machine instead of requiring every request to be sent to a hosted LLM API.
+
+However, users should review the configuration of any external services or models they add to the system before using the application with sensitive information.
 
 ---
 
-## Contact
+# 📚 Learning Resources
 
-- **GitHub:** [Esha-Mirza](https://github.com/Esha-Mirza)
-- **Email:** esha101374@gmail.com
+The project builds on several excellent open-source technologies:
+
+* [OpenAI Whisper](https://github.com/openai/whisper) — Speech recognition
+* [Ollama](https://ollama.com/) — Local LLM runtime
+* [Streamlit](https://streamlit.io/) — Interactive Python applications
+* [pyttsx3](https://github.com/nateshmbhat/pyttsx3) — Text-to-speech
+* [FFmpeg](https://ffmpeg.org/) — Multimedia processing
+
+---
+
+# 🤝 Contributing
+
+Contributions, ideas, improvements, and experiments are welcome.
+
+A typical contribution workflow:
+
+```bash
+git checkout -b feature/your-feature
+
+git add .
+
+git commit -m "feat: add your feature"
+
+git push origin feature/your-feature
+```
+
+Then open a Pull Request describing the change.
+
+---
+
+# 📄 License
+
+This project is released under the **MIT License**.
+
+See the `LICENSE` file for details.
+
+---
+
+# 👩‍💻 Author
+
+**Esha Mirza**
+
+AI / Machine Learning Developer
+
+[GitHub](https://github.com/Esha-Mirza)
+
+---
+
+<p align="center">
+  <strong>🎙️ Voice in. Intelligence out.</strong>
+</p>
+
+<p align="center">
+  Built with Python, Whisper, Ollama, and open-source AI.
+</p>
