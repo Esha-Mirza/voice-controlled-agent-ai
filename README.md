@@ -1,4 +1,4 @@
-<h1 align="center">VoiceForge AI</h1>
+<h1 align="center"> VoiceForge AI </h1>
 
 <p align="center">
   <strong>Voice-controlled interaction with local AI agents.</strong>
